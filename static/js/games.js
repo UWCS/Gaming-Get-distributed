@@ -11,7 +11,7 @@ $(document).ready(function() {
 function checkIfInstalled(button) {
     const game = button[0].value;
     $.ajax({
-        url: `check/${game}`,
+        url: `check?game=${game}`,
         dataType: "text"
     }).done(raw => {
         var data = JSON.parse(raw);
@@ -20,7 +20,7 @@ function checkIfInstalled(button) {
             button.prop("disabled", false);
             button.addClass("installed");
             button.removeClass("uninstalled");
-            button.append('<img src="static/img/play.png" class="play-symbol" draggable=false />');
+            button.append('<img src="img/play.png" class="play-symbol" draggable=false />');
             button.removeAttr("style");
             button.unbind('click').click(function(event) {
                 event.preventDefault();
@@ -34,15 +34,15 @@ function requestInstallation(button) {
     // Set button to loading
     button.off();
     button.prop("disabled", true);
-    button.css("background-image", "linear-gradient(to right, var(--button_blue), var(--button_blue) 0, transparent 0, transparent), url('static/img/hash.png')");
+    button.css("background-image", "linear-gradient(to right, var(--button_blue), var(--button_blue) 0, transparent 0, transparent), url('img/hash.png')");
     button.css("background-size", "100%, 16px");
     button.css("background-position", "right");
     button.css("background-color", "var(--warwickgg_dark_grey)");
     button.text("");
-    
+
     const game = button[0].value;
     $.ajax({
-            url: `install/${game}`,
+            url: `install?game=${game}`,
             dataType: "text"
         })
         .done(data => {
@@ -52,7 +52,7 @@ function requestInstallation(button) {
     // Animate the loading bar
     function updateProgress() {
         $.ajax({
-                url: `status/${game}`,
+                url: `status?game=${game}`,
                 dataType: "json"
             })
             .done(data => {
@@ -61,7 +61,7 @@ function requestInstallation(button) {
                     button.prop("disabled", false);
                     button.addClass("installed");
                     button.removeClass("uninstalled");
-                    button.append('<img src="static/img/play.png" class="play-symbol" draggable=false />');
+                    button.append('<img src="img/play.png" class="play-symbol" draggable=false />');
                     button.removeAttr("style");
                     button.unbind('click').click(function(event){
                         event.preventDefault();
@@ -69,7 +69,7 @@ function requestInstallation(button) {
                     });
                 } else {
                     const percentage = data.progress * 100;
-                    button.css("background-image", "linear-gradient(to right, var(--button_blue), var(--button_blue) " + percentage + "%, transparent " + percentage + "%, transparent), url('static/img/hash.png')");
+                    button.css("background-image", "linear-gradient(to right, var(--button_blue), var(--button_blue) " + percentage + "%, transparent " + percentage + "%, transparent), url('img/hash.png')");
                     setTimeout(function() {
                         updateProgress();
                     }, 100);
@@ -81,7 +81,7 @@ function requestInstallation(button) {
 function requestLaunch(button) {
     const game = button[0].value;
     $.ajax({
-            url: `launch/${game}`,
+            url: `launch?game=${game}`,
             dataType: "text"
         })
         .done(_ => {

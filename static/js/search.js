@@ -59,7 +59,7 @@ games.each(function(index, element) {
             }
         });
 
-        if (matches > 0)
+        if (matches === search.length)
             $(element).show(100);
         else
             $(element).hide(150);
