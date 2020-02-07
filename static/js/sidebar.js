@@ -14,19 +14,19 @@ $(document).ready(function() {
 
     /* Button events */
     $("#button-steam").click(function() {
-        $.post("steam", {});
+        $.get("steam", {});
     });
 
     $("#button-volume").click(function() {
-        $.post("volume", {});
+        $.get("volume", {});
     });
 
     $("#button-mouse").click(function() {
-        $.post("mouse", {});
+        $.get("mouse", {});
     });
 
     $("#button-resolution").click(function() {
-        $.post("resolution", {});
+        $.get("resolution", {});
     });
 
     $("#button-food").click(function() {
