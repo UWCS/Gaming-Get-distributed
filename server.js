@@ -65,7 +65,7 @@ app.get('/status', function(req,res) {
 
 app.get('/launch', function(req,res) {
   let game = req.query.game;
-  let success = launchGame(path);
+  let success = launchGame(game);
   if(success)
   {
     res.status(200).send(`Launching ${game}`);
